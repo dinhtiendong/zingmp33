@@ -15,6 +15,7 @@ const List = ({songData}) => {
     onClick={()=>{
         dispatch(actions.setCurSongId(songData?.encodeId))
         dispatch(actions.play(true))
+        dispatch(actions.playAlbum(true))
     }}
     // ở đây onclick này là ta đang sent 1 cái id về redux vì songData là item được api trả về 
     >

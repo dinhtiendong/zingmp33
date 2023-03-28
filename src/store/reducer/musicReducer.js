@@ -3,9 +3,11 @@ import actionTypes from "../actions/actionTypes";
 
 const initState = {
     curSongId: null,
-    isPlaying: false
+    isPlaying: false,
+    atAlbum: false, // nếu type = 1 hoặc khác 4 sẽ là true
     //  Ban đầu sẽ là null nếu mà chưa chọn bài hát nào nếu mà đã chọn bài hát rồi thì 
     // Ta sẽ xét thành ID của bài hát đó
+    playlist: []
 }
 
 const musicReducer = (state = initState,action) =>{
@@ -29,6 +31,18 @@ const musicReducer = (state = initState,action) =>{
                 ...state,
                 isPlaying: action.flag
             }
+
+        case actionTypes.SET_ALBUM:
+            return {
+                ...state,
+                atAlbum: action.flag
+            }
+         case actionTypes.PLAYLIST:
+                return {
+                    ...state,
+                    songs: action.songs
+                }
+
 
         default: 
          return state

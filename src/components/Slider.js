@@ -84,6 +84,8 @@ const Slider = () => {
             dispatch(actions.setCurSongId(item.encodeId))
             // dispatch là người đưa thư và truyền cho nó bức thư action.setCurSongId()
             dispatch(actions.play(true))
+            dispatch(actions.playAlbum(false))
+            
         }
         else if(item?.type === 4)
         {
@@ -95,6 +97,10 @@ const Slider = () => {
             // [0] là lấy ra giá trị mảng đầu tiên sau khi cắt
 
             navigate(albumPath)
+        }
+        else{
+            dispatch(actions.playAlbum(false))
+
         }
     }
 

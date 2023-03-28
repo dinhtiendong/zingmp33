@@ -4,13 +4,16 @@ import * as apis from '../../apis'
 import moment from 'moment'
 import { Lists } from '../../components'
 import { Scrollbars } from 'react-custom-scrollbars-2';
-//  hook này được sử dụng lấy cái param trên url
+import * as actions from '../../store/actions'
+import { useDispatch } from 'react-redux'
+// useRef hook này được sử dụng lấy cái param trên url
 
 
 const Album = () => {
 
     const { pid } = useParams()
     const [playListData,setPlayListData] = useState({})
+    const dispatch = useDispatch()
 
     useEffect(()=>{
       const fetchDetailPlayList =async () =>{
@@ -18,6 +21,7 @@ const Album = () => {
         if(response?.data.err === 0)
         {
           setPlayListData(response.data?.data)
+          dispatch(actions.setPlaylist(response?.data?.data?.song?.items))
         }
       }
 
@@ -52,7 +56,7 @@ const Album = () => {
               {playListData?.sortDescription}
             </span>
           </span>
-            <Lists songs={playListData?.song?.items} totalDuration={playListData?.song?.totalDuration}/>
+            <Lists totalDuration={playListData?.song?.totalDuration}/>
       </div>
     </Scrollbars>
     </div>

@@ -11,7 +11,7 @@ var intervalId // để hứng intervalId và cler nó khi ko cần
 
   const Player = () => {
     
-    const { curSongId, isPlaying } = useSelector(state => state.music)
+    const { curSongId, isPlaying,atAlbum } = useSelector(state => state.music)
     // ở  đây useSelector sẽ lấy được cái id ra và truyền vào trong thằng useEffect ở ngay dưới
     const [songInfo,setSongInfo] = useState(null)
     const [audio,setAudio] = useState(new Audio())
@@ -102,6 +102,13 @@ var intervalId // để hứng intervalId và cler nó khi ko cần
       setCurSeconds(Math.round(percent * songInfo.duration /100))
     }
 
+    const handleNextSong = () => {
+      if(atAlbum)
+      {
+        console.log(1);
+      }
+    }
+
     return (
       <div className='bg-main-400 h-full px-5 flex'>
           <div className='w-[30%] flex flex-auto items-center gap-3'>
@@ -132,7 +139,7 @@ var intervalId // để hứng intervalId và cler nó khi ko cần
                     >
                       {isPlaying ? <BsPauseFill size={30}/> : <BsPlayFill size={30}/> }
                   </span>
-                  <span className='cursor-pointer'><MdSkipNext size={24}/></span>
+                  <span onClick={handleNextSong} className={`${!atAlbum ? 'text-gray-500' : 'cursor-pointer'}`}><MdSkipNext size={24}/></span>
                   <span className='cursor-pointer' title='Bật phát lại tất cả'><CiRepeat size={24}/></span>
   
               </div>
